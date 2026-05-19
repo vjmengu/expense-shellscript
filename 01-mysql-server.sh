@@ -36,7 +36,7 @@ else
     echo " mysql start success "
 fi
 
-msql_secure_installation --set-root-pass ExpenseApp@1
+mysql_secure_installation --set-root-pass ExpenseApp@1
 if [ $? -ne 0 ]
 then
     echo " setting root password failure "
