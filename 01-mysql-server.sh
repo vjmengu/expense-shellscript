@@ -48,3 +48,4 @@ then
     fi
 else
     echo " mysql-server password already set "
+fi
