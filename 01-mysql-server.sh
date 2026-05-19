@@ -36,10 +36,15 @@ else
     echo " mysql start success "
 fi
 
-mysql_secure_installation --set-root-pass ExpenseApp@1
+mysql -h 13.217.226.103 -u root -pExpenseApp@1 -e 'show databases;'
 if [ $? -ne 0 ]
 then
-    echo " setting root password failure "
+    mysql_secure_installation --set-root-pass ExpenseApp@1
+    if [ $? -ne 0 ]
+    then
+        echo " setting root password failure "
+    else
+        echo " setting root password success "
+    fi
 else
-    echo " setting root password success "
-fi
+    echo " mysql-server password already set "
