@@ -7,45 +7,34 @@ then
     exit 1
 fi
 
+validate (){
+    if [ $1 -ne 0 ]
+    then
+        echo " $2....Failure "
+    else
+        echo " $2....Success"
+    fi
+}
+
 dnf list installed mysql-server
 if [ $? -ne 0 ]
 then
     dnf install mysql-server -y
-    if [ $? -ne 0 ]
-    then
-        echo " Mysql-server installation....Failure "
-    else
-        echo " Mysql-server installation....Success"
-    fi
+    validate $? "Mysql-server installation"
 else
     echo " mysql-server already installed "
 fi
 
 systemctl enable mysqld
-if [ $? -ne 0 ]
-then
-    echo " mysql enable failure "
-else
-    echo " mysql enable success "
-fi
+validate $? "mysql enable"
 systemctl start mysqld
-if [ $? -ne 0 ]
-then
-    echo " mysql start failure "
-else
-    echo " mysql start success "
-fi
+validate $? "mysql start"
 
 mysql -h 13.217.226.103 -u root -pExpenseApp@1 -e 'show databases;'
 if [ $? -ne 0 ]
 then
     mysql_secure_installation --set-root-pass ExpenseApp@1
-    if [ $? -ne 0 ]
-    then
-        echo " setting root password failure "
-    else
-        echo " setting root password success "
-    fi
+    validate $? "setting root password"
 else
     echo " mysql-server password already set "
 fi
