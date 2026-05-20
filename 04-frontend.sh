@@ -42,7 +42,7 @@ then
     systemctl enable nginx &>>$log_file
     validate $? "enabling nginx"
 else
-    echo -e "nginx already installed...$Y Skipping $N)
+    echo -e "nginx already installed...$Y Skipping $N"
 fi
 
 rm -rf /usr/share/nginx/html/* &>>$log_file
