@@ -16,7 +16,7 @@ N="\e[0m"
 mkdir -p "/var/log/expense-logs"
 log_folder="/var/log/expense-logs"
 log_name=$(echo $0 | cut -d "." -f1)
-timstamp=$(date +%Y-%m-%d-%H-%M-%S)
+timestamp=$(date +%Y-%m-%d-%H-%M-%S)
 log_file="$log_folder/$log_name-$timestamp.log"
 
 validate(){
@@ -70,7 +70,7 @@ validate $? "npm install"
 
 cp /home/ec2-user/expense-shellscript/backend.service /etc/systemd/system/backend.service &>>$log_file
 
-dnf install mysql &>>$log_file
+dnf install mysql -y &>>$log_file
 validate $? "mysql installation"
 
 mysql -h mysql.gt650.online -u root -pExpenseApp@1 < /app/schema/backend.sql &>>$log_file
