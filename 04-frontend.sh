@@ -34,6 +34,7 @@ echo " The script execution started at....$timestamp" &>>$log_file
 check
 
 dnf installed nginx &>>$log_file
+
 if [ $? -ne 0 ]
 then
     dnf install nginx -y &>>$log_file
@@ -50,7 +51,7 @@ validate $? "removing existing html files"
 curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$log_file
 validate $? "Downloading Latest code"
 
-cd /user/share/nginx/html &>>$log_file
+cd /usr/share/nginx/html &>>$log_file
 validate $? "moving to html directory"
 
 unzip /tmp/frontend.zip &>>$log_file
