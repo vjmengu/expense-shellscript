@@ -57,7 +57,7 @@ unzip /tmp/frontend.zip &>>$log_file
 validate $? "unzipped frontend html"
 
 cp /home/ec2-user/expense-shellscript/expense.conf /etc/nginx/default.d/expense.conf &>>$log_file
-validate $? "copied expense conf"
+validate $? " copied expense conf "
 
 systemctl restart nginx &>>$log_file
-validate $? "restarted nginx"
+validate $? " restarted nginx "
